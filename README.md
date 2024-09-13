@@ -2,6 +2,9 @@
 
 This project is a clone of Reddit, built using modern web development technologies. It aims to replicate the core functionalities of Reddit, providing a platform for users to create, share, and discuss content.
 
+## You can see it here 
+https://grddit-7f7df.web.app/
+note: i'm using freehosting so server might take 50 seconds to get active again then it will work faster
 ## Features
 
 - **Frontend**: Built with React, utilizing Redux for state management, and styled with Tailwind CSS.
