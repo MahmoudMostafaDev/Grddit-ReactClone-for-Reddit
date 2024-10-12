@@ -3,7 +3,7 @@
 This project is a clone of Reddit, built using modern web development technologies. It aims to replicate the core functionalities of Reddit, providing a platform for users to create, share, and discuss content.
 
 ## You can see it here 
-[https://grddit-7f7df.web.app/](https://grdditgreen.vercel.app/)
+https://grdditgreen.vercel.app
 note: i'm using netlify , and real-time-chat uses socket.io , and because of that netlify is serverless the chat doesn't work , but on a local host for the server it works
 ## Features
 
