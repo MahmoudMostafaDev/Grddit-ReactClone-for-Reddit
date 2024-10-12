@@ -2,7 +2,7 @@ import { io } from "socket.io-client";
 
 class Socket {
   constructor() {
-    this.socket = io("https://grddit-backend.onrender.com", {
+    this.socket = io("https://grdback.netlify.app/.netlify/functions/api", {
       path: "/socket.io",
     });
   }
