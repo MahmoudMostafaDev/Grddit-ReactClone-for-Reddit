@@ -5,7 +5,7 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 import { createSub } from "../util/http";
 import usePost from "../hooks/usePost";
 import { useNavigate } from "react-router-dom";
-import Buttons from "../components/MainSubs/create-sub/buttons";
+import Buttons from "../components/MainSubs/create-sub/Buttons";
 
 export default function CreateSub() {
   const {
