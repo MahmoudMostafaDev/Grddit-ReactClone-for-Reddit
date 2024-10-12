@@ -1,4 +1,4 @@
-import Element from "./element";
+import Element from "./Element";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Sub from "./Sub";
