@@ -2,7 +2,7 @@ import { getToken, getUsername } from "./auth";
 import axios from "axios";
 import slugify from "slugify";
 export async function signUp(body) {
-  // const response = await fetch("https://grddit-backend.onrender.com/register", {
+  // const response = await fetch("https://grdback.netlify.app/.netlify/functions/api/register", {
   //   method: "POST",
   //   headers: {
   //     "Content-Type": "multipart/form-data",
@@ -18,7 +18,7 @@ export async function signUp(body) {
   // }
   try {
     const response = await axios.post(
-      "https://grddit-backend.onrender.com/register",
+      "https://grdback.netlify.app/.netlify/functions/api/register",
       body,
       {
         headers: {
@@ -33,13 +33,16 @@ export async function signUp(body) {
   }
 }
 export async function LoginFn(body) {
-  const response = await fetch("https://grddit-backend.onrender.com/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  const response = await fetch(
+    "https://grdback.netlify.app/.netlify/functions/api/login",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }
+  );
   const data = await response.json();
   if (data.error && data.error === "user or password invalid") {
     throw new Error("Username or Password is incorrect");
@@ -56,7 +59,9 @@ export async function LoginFn(body) {
 export async function createSub(formData) {
   try {
     const response = await axios.post(
-      `https://grddit-backend.onrender.com/api/subs/${formData.get("subId")}`,
+      `https://grdback.netlify.app/.netlify/functions/api/api/subs/${formData.get(
+        "subId"
+      )}`,
       formData,
       {
         headers: {
@@ -77,11 +82,11 @@ export async function getHomepage(payload) {
   let response = null;
   if (username != "null") {
     response = await fetch(
-      `https://grddit-backend.onrender.com/api/posts/homepage/${username}`
+      `https://grdback.netlify.app/.netlify/functions/api/api/posts/homepage/${username}`
     );
   } else {
     response = await fetch(
-      `https://grddit-backend.onrender.com/api/posts/homepage`
+      `https://grdback.netlify.app/.netlify/functions/api/api/posts/homepage`
     );
   }
   if (!response.ok) {
@@ -92,7 +97,7 @@ export async function getHomepage(payload) {
 }
 export async function getSubs(id) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/subs/${id}`
+    `https://grdback.netlify.app/.netlify/functions/api/api/subs/${id}`
   );
 
   const data = await response.json();
@@ -110,7 +115,7 @@ export async function createPost(formData) {
   const slug = slugify(formData.get("title"), { lower: true });
   try {
     const res = await axios.post(
-      `https://grddit-backend.onrender.com/api/posts/${slug}`,
+      `https://grdback.netlify.app/.netlify/functions/api/api/posts/${slug}`,
       formData,
       {
         headers: {
@@ -127,7 +132,7 @@ export async function createPost(formData) {
 
 export async function getSubPosts(id) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/subPosts/${id}`
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/subPosts/${id}`
   );
   const data = await response.json();
 
@@ -139,7 +144,7 @@ export async function getSubPosts(id) {
 
 export async function joinSub(id) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/subs/${id}/join`,
+    `https://grdback.netlify.app/.netlify/functions/api/api/subs/${id}/join`,
     {
       method: "POST",
       headers: {
@@ -159,7 +164,7 @@ export async function joinSub(id) {
 
 export async function getUserInfo(username) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/user/${username}`
+    `https://grdback.netlify.app/.netlify/functions/api/api/user/${username}`
   );
   const data = await response.json();
   if (!data.success) {
@@ -179,7 +184,7 @@ export async function getUserInfo(username) {
 
 export async function vote({ id, direction }) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/${id}/${direction}`,
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/${id}/${direction}`,
     {
       method: "POST",
       headers: {
@@ -197,7 +202,7 @@ export async function vote({ id, direction }) {
 }
 export async function addMainComment({ id, comment }) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/${id}/comment`,
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/${id}/comment`,
     {
       method: "POST",
       headers: {
@@ -215,7 +220,7 @@ export async function addMainComment({ id, comment }) {
 }
 export async function getPostData(id) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/${id}`
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/${id}`
   );
   const data = await response.json();
   if (!response.ok) {
@@ -226,7 +231,7 @@ export async function getPostData(id) {
 
 export async function addSubComment({ id, reply, commentId }) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/reply/${id}`,
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/reply/${id}`,
     {
       method: "POST",
       headers: {
@@ -245,7 +250,7 @@ export async function addSubComment({ id, reply, commentId }) {
 
 export async function commentVote({ id, commentId, direction }) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/${id}/commentVote`,
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/${id}/commentVote`,
     {
       method: "POST",
       headers: {
@@ -264,7 +269,7 @@ export async function commentVote({ id, commentId, direction }) {
 
 export async function getRandomPosts() {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/random`
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/random`
   );
   const data = await response.json();
   if (!response.ok) {
@@ -275,7 +280,7 @@ export async function getRandomPosts() {
 
 export async function getMiniSubs() {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/subs/explore`
+    `https://grdback.netlify.app/.netlify/functions/api/api/subs/explore`
   );
   const data = response.json();
   if (!response.ok) {
@@ -286,7 +291,7 @@ export async function getMiniSubs() {
 
 export async function addRecent(id, post) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/user/${id}/recent`,
+    `https://grdback.netlify.app/.netlify/functions/api/api/user/${id}/recent`,
     {
       method: "POST",
       headers: {
@@ -305,7 +310,7 @@ export async function addRecent(id, post) {
 }
 export async function getRecent() {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/user/${getUsername()}/recent`
+    `https://grdback.netlify.app/.netlify/functions/api/api/user/${getUsername()}/recent`
   );
   const data = await response.json();
   if (!response.ok) {
@@ -317,7 +322,7 @@ export async function getRecent() {
 
 export async function getChats() {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/chats`,
+    `https://grdback.netlify.app/.netlify/functions/api/api/chats`,
     {
       headers: {
         Authorization: "Bearer " + getToken(),
@@ -333,7 +338,7 @@ export async function getChats() {
 
 export async function searchPosts(keyword) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/posts/search/${keyword}`
+    `https://grdback.netlify.app/.netlify/functions/api/api/posts/search/${keyword}`
   );
   const data = await response.json();
   if (!response.ok) {
@@ -344,7 +349,7 @@ export async function searchPosts(keyword) {
 
 export async function searchSubs(keyword) {
   const response = await fetch(
-    `https://grddit-backend.onrender.com/api/subs/search/${keyword}`
+    `https://grdback.netlify.app/.netlify/functions/api/api/subs/search/${keyword}`
   );
   const data = await response.json();
   if (!response.ok) {
