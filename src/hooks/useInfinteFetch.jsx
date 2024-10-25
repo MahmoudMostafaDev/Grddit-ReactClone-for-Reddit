@@ -17,7 +17,7 @@ export default function useInfinteFetch() {
       try {
         setIsFetching(true);
         fetch(
-          "https://grddit-backend.onrender.com/api/posts/getByNum?limit=" +
+          "https://app-blue-wave-griddit.fly.dev/api/posts/getByNum?limit=" +
             numb +
             "&offset=" +
             lastStart
