@@ -24,6 +24,7 @@ export default function RootPage() {
   const token = useRouteLoaderData("root");
   const submit = useSubmit();
   if (token != null && token != "null") {
+    console.log("1");
     setIsLogged(true);
   }
   window.onresize = () => {
@@ -43,9 +44,10 @@ export default function RootPage() {
     async function getUserDataI() {
       try {
         const response = await fetch(
-          `https://grddit-backend.onrender.com/api/user/${getUsername()}`
+          `https://app-blue-wave-griddit.fly.dev/api/user/${getUsername()}`
         );
         const res = await response.json();
+        console.log(res);
         dispatch(userDataActions.updateUser(res));
       } catch (err) {
         submit(null, { method: "post", action: "/logout" });
