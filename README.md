@@ -4,7 +4,6 @@ This project is a clone of Reddit, built using modern web development technologi
 
 ## You can see it here 
 https://grdditgreen.vercel.app
-note: i'm using netlify , and real-time-chat uses socket.io , and because of that netlify is serverless the chat doesn't work , but on a local host for the server it works
 ## Features
 
 - **Frontend**: Built with React, utilizing Redux for state management, and styled with Tailwind CSS.
