@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-const numb = 1;
+const numb = 2;
+const attempt = 3;
 export default function useInfinteFetch() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
@@ -13,28 +14,40 @@ export default function useInfinteFetch() {
     }
   }
   useEffect(() => {
-    function fetchdata() {
-      try {
-        setIsFetching(true);
-        fetch(
-          "https://app-blue-wave-griddit.fly.dev/api/posts/getByNum?limit=" +
-            numb +
-            "&offset=" +
-            lastStart
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            if (!data.success) {
-              setFinished(true);
-            }
-            setData((prev) => [...prev, ...data.posts]);
-          });
-      } catch (err) {
-        setError({ message: err.message });
-      } finally {
-        setIsFetching(false);
+    async function fetchdata() {
+      setIsFetching(true);
+      setError(null);
+      for (let i = 0; i < attempt; i++) {
+        try {
+          const res = await fetch(
+            "https://app-blue-wave-griddit.fly.dev/api/posts/getByNum?limit=" +
+              numb +
+              "&offset=" +
+              lastStart
+          );
+          if (!res.ok) {
+            throw new Error("error: " + res.status);
+          }
+          const data = await res.json();
+          if (!data.success) {
+            setFinished(true);
+          }
+          if (data.posts.length != 0) {
+            setIsFetching(false);
+            return setData((prev) => [...prev, ...data.posts]);
+          }
+        } catch (err) {
+          if (i == attempt - 1) setError(err);
+        }
+        if (i == attempt - 1) setIsFetching(false);
+        await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(1);
+          }, [1000]);
+        });
       }
     }
+
     if (!finished) {
       fetchdata();
     }

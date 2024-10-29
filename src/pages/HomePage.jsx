@@ -7,8 +7,17 @@ export default function HomePage() {
   const { data, isFetching, error } = useContext(homeContext);
   return (
     <div className={"mx-auto " + widthClasses}>
-      {data && <PostsContainer isHome={true} posts={data} />}
-      {error && <p className="text-red-500">{error.message}</p>}
+      {data && (
+        <PostsContainer
+          isHome={true}
+          posts={data}
+          isFetching={isFetching}
+          error={error}
+        />
+      )}
+      {error && (
+        <p className="text-red-500 text-xl">{error.message} try to refresh</p>
+      )}
       {isFetching && <p className="text-gray-200 p-5">Loading...</p>}
     </div>
   );
